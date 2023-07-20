@@ -34,6 +34,7 @@ Route::prefix('answers')
     ->group(function () {
         Route::get('list', [QuestionController::class, 'index'])->name('answer.list');
         Route::get('create', [QuestionController::class, 'create'])->name('answer.create');
+        Route::post('create', [QuestionController::class, 'postCreate'])->name('answer.post.create');
     });
 
 Route::prefix('kind')

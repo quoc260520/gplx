@@ -15,8 +15,6 @@ class QuestionController extends Controller
     protected $kindQuestionService;
     protected $kinds;
 
-
-
     public function __construct(QuestionService $questionService, KindQuestionService $kindQuestionService)
     {
         $this->questionService = $questionService;
@@ -30,8 +28,8 @@ class QuestionController extends Controller
     {
         $questions = $this->questionService->index();
         return view('admin.answers.list')
-        ->withKinds($this->kinds)
-        ->withQuestions($questions);
+            ->withKinds($this->kinds)
+            ->withQuestions($questions);
     }
 
     /**
@@ -39,20 +37,15 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        return view('admin.answers.create');
+        return view('admin.answers.create')->withKinds($this->kinds);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(QuestionRequest $request)
+    public function postCreate(QuestionRequest $request)
     {
-        $data['title'] = 'Câu trả lời';
-        $question = QuestionService::getInstance()->create($request);
-        $data['question_id'] = $question->id;
-        toastr()->success('Thêm câu hỏi thành công');
-
-        return view('admin.answers.create')->with(['data' => $data]);
+        dd($request->all());
     }
 
     /**
