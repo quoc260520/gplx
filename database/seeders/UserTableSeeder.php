@@ -17,14 +17,13 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'admin',
+            'full_name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('12345678'),
-            'active' => User::STATUS_ACTIVE
         ]);
     }
 
     public function isAdmin() {
-        return $this->hasRole(config('access.role.admin_role'));
+        return $this->hasRole(config(User::ROLE_ADMIN));
     }
 }

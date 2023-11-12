@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Exam;
-use Illuminate\Http\Request;
+use App\Models\DrivingLicense;
+use App\Http\Requests\StoreDrivingLicenseRequest;
+use App\Http\Requests\UpdateDrivingLicenseRequest;
 
-class ExamController extends Controller
+class DrivingLicenseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +27,7 @@ class ExamController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreDrivingLicenseRequest $request)
     {
         //
     }
@@ -34,7 +35,7 @@ class ExamController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Exam $exam)
+    public function show(DrivingLicense $drivingLicense)
     {
         //
     }
@@ -42,7 +43,7 @@ class ExamController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Exam $exam)
+    public function edit(DrivingLicense $drivingLicense)
     {
         //
     }
@@ -50,7 +51,7 @@ class ExamController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Exam $exam)
+    public function update(UpdateDrivingLicenseRequest $request, DrivingLicense $drivingLicense)
     {
         //
     }
@@ -58,7 +59,7 @@ class ExamController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Exam $exam)
+    public function destroy(DrivingLicense $drivingLicense)
     {
         //
     }

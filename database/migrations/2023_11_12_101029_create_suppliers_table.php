@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exams', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->tinyInteger('topic');
-            $table->timestamp('start_time');
+            $table->string('name');
+            $table->string('address');
+            $table->unsignedInteger('gdt');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -27,9 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('exams', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-        });
-        Schema::dropIfExists('exams');
+        Schema::dropIfExists('suppliers');
     }
 };
