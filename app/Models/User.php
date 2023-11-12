@@ -15,6 +15,10 @@ class User extends Authenticatable
 
     const STATUS_DE_ACTIVE = 0;
     const STATUS_ACTIVE = 1;
+    const ROLE_ADMIN = 'admin';
+    const ROLE_STAFF = 'staff';
+    const ROLE_CLIENT = 'client';
+
 
 
     /**
@@ -22,21 +26,14 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $fillable = ['email', 'password', 'position_code', 'full_name', 'address', 'phone', 'cccd', 'sex', 'image'];
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * The attributes that should be cast.
@@ -51,5 +48,4 @@ class User extends Authenticatable
     {
         return $this->hasRole('admin');
     }
-
 }

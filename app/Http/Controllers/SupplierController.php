@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Answer;
-use Illuminate\Http\Request;
+use App\Models\Supplier;
+use App\Http\Requests\StoreSupplierRequest;
+use App\Http\Requests\UpdateSupplierRequest;
 
-class AnswerController extends Controller
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +27,7 @@ class AnswerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreSupplierRequest $request)
     {
         //
     }
@@ -34,7 +35,7 @@ class AnswerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Answer $answer)
+    public function show(Supplier $supplier)
     {
         //
     }
@@ -42,7 +43,7 @@ class AnswerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Answer $answer)
+    public function edit(Supplier $supplier)
     {
         //
     }
@@ -50,7 +51,7 @@ class AnswerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Answer $answer)
+    public function update(UpdateSupplierRequest $request, Supplier $supplier)
     {
         //
     }
@@ -58,7 +59,7 @@ class AnswerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Answer $answer)
+    public function destroy(Supplier $supplier)
     {
         //
     }

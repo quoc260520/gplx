@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -14,7 +15,8 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'user']);
+        Role::create(['name' => User::ROLE_ADMIN]);
+        Role::create(['name' => User::ROLE_STAFF]);
+        Role::create(['name' => User::ROLE_CLIENT]);
     }
 }
