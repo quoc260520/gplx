@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('full_name');
             $table->string('address')->nullable();
             $table->unsignedInteger('phone')->nullable();
-            $table->unsignedInteger('cccd')->nullable();
+            $table->unsignedBigInteger('cccd')->nullable();
             $table->tinyInteger('sex')->nullable();
             $table->string('image')->nullable();
             $table->rememberToken();

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,11 +24,14 @@ Route::group(['middleware' => ['checkLogin']], function () {
         ->get('/', [AuthController::class, 'dashboard'])
         ->name('home');
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
-    // Route::prefix('answers')
-    //     ->middleware('role:admin')
-    //     ->group(function () {
-    //         Route::get('list', [QuestionController::class, 'index'])->name('answer.list');
-    //         Route::get('create', [QuestionController::class, 'create'])->name('answer.create');
-    //         Route::post('create', [QuestionController::class, 'postCreate'])->name('answer.post.create');
-    //     });
+    Route::prefix('staff')
+        ->middleware('role:admin|staff')
+        ->group(function () {
+            Route::get('/', [UserController::class, 'staff'])->name('staff.list');
+            Route::get('/create', [UserController::class, 'getStaffCreate'])->name('staff.create');
+            Route::post('/create', [UserController::class, 'staffCreate'])->name('post.staff.create');
+            Route::get('/update/{id}', [UserController::class, 'getStaffUpdate'])->name('staff.update');
+            Route::post('/update/{id}', [UserController::class, 'staffUpdate'])->name('post.staff.update');
+            Route::delete('/delete/{id}', [UserController::class, 'staffDelete'])->name('staff.delete');
+        });
 });

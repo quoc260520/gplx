@@ -18,6 +18,10 @@ class User extends Authenticatable
     const ROLE_ADMIN = 'admin';
     const ROLE_STAFF = 'staff';
     const ROLE_CLIENT = 'client';
+    const MALE = 0;
+    const FEMALE = 1;
+    const PAGINATE = 20;
+
 
 
 
