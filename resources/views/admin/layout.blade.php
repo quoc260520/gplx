@@ -15,7 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
         integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -104,9 +104,8 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="{{ route('staff.list') }}"
-                                class="nav-link {{ Route::is('staff.list') ? 'active' : '' }}">
+                        <li class="nav-item {{ Route::is('staff.*') ? 'menu-is-opening menu-open' : '' }}">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>
                                     Quản lý nhân viên
@@ -131,7 +130,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item {{ Route::is('client.*') ? 'menu-is-opening menu-open' : '' }}">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>
@@ -141,13 +140,15 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('home') }}" class="nav-link">
+                                    <a href="{{ route('client.list') }}"
+                                        class="nav-link {{ Route::is('client.list') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh sách</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('home') }}" class="nav-link">
+                                    <a href="{{ route('client.create') }}"
+                                        class="nav-link {{ Route::is('client.create') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm mới</p>
                                     </a>

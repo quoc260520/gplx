@@ -17,15 +17,15 @@ class UserRepository
     {
         $this->model = $model;
     }
-    public function getAll($request)
+    public function getAll($request, $role)
     {
         $email = $request->email;
         $full_name = $request->full_name;
         $phone = $request->phone;
         $cccd = $request->cccd;
 
-        $staffs = $this->model
-            ::role(User::ROLE_STAFF)
+        $users = $this->model
+            ::role($role)
             ->where('id', '<>', Auth::user()->id)
             ->when($email, function ($query, $email) {
                 $query->where('email', 'like', ["%$email%"]);
@@ -41,7 +41,7 @@ class UserRepository
             })
             ->orderByDesc('created_at')
             ->paginate(User::PAGINATE);
-        return [$staffs, $email, $full_name, $phone, $cccd];
+        return [$users, $email, $full_name, $phone, $cccd];
     }
     public function getById($id)
     {
@@ -150,10 +150,124 @@ class UserRepository
     public function staffDelete($id)
     {
         $staff = $this->getById($id);
+        if ($staff->hasRole(User::ROLE_CLIENT)) {
+            $staff->removeRole(User::ROLE_STAFF);
+            return true;
+        }
         if ($staff->image) {
             $this->deleteImage($staff->image);
         }
         return $staff->delete();
+    }
+    public function createClient($data)
+    {
+        try {
+            $image = $data->file('image');
+            if (is_file($image)) {
+                $image = $this->uploadImage($image);
+            }
+            $user = $this->model->where('email', $data->email)->first();
+            if ($user) {
+                if ($user->hasRole(User::ROLE_CLIENT)) {
+                    return [
+                        'flag' => false,
+                        'message' => 'Email đã tồn tại',
+                    ];
+                } else {
+                    $user->assignRole(User::ROLE_CLIENT);
+                    return [
+                        'flag' => true,
+                        'message' => 'Thêm khách hàng thành công',
+                    ];
+                }
+            }
+            $staff = $this->model->create([
+                'email' => $data->email,
+                'password' => Hash::make($data->password),
+                'full_name' => $data->full_name,
+                'address' => $data->address,
+                'phone' => $data->phone,
+                'cccd' => $data->cccd,
+                'sex' => $data->sex,
+                'image' => $image,
+            ]);
+            $staff->assignRole(User::ROLE_CLIENT);
+            return [
+                'flag' => true,
+                'message' => 'Thêm khách hàng thành công',
+            ];
+        } catch (\Exception $e) {
+            $this->deleteImage($image);
+            Log::channel('daily')->error('' . $e->getMessage());
+            return [
+                'flag' => false,
+                'message' => 'Đã có lỗi xảy ra',
+            ];
+        }
+    }
+    public function updateClient($data, $id)
+    {
+        try {
+            $image = $data->file('image');
+            if (is_file($image)) {
+                $image = $this->uploadImage($image);
+            }
+            $user = $this->model
+                ->where('email', $data->email)
+                ->where('id', '<>', $id)
+                ->first();
+            if ($user) {
+                if ($user->hasRole(User::ROLE_CLIENT)) {
+                    return [
+                        'flag' => false,
+                        'message' => 'Email đã tồn tại',
+                    ];
+                } else {
+                    $user->assignRole(User::ROLE_CLIENT);
+                    return [
+                        'flag' => true,
+                        'message' => 'Cập nhật khách hàng thành công',
+                    ];
+                }
+            }
+            $staff = $this->getById($id);
+            $staff->update([
+                'email' => $data->email,
+                'password' => $data->password ? Hash::make($data->password) : $staff->password,
+                'full_name' => $data->full_name,
+                'address' => $data->address,
+                'phone' => $data->phone,
+                'cccd' => $data->cccd,
+                'sex' => $data->sex,
+                'image' => $image ?? $data->image_old,
+            ]);
+            if (is_file($image) && $data->image_old) {
+                $this->deleteImage($data->image_old);
+            }
+            return [
+                'flag' => true,
+                'message' => 'Cập nhật khách hàng thành công',
+            ];
+        } catch (\Exception $e) {
+            $this->deleteImage($image);
+            Log::channel('daily')->error('' . $e->getMessage());
+            return [
+                'flag' => false,
+                'message' => 'Đã có lỗi xảy ra',
+            ];
+        }
+    }
+    public function clientDelete($id)
+    {
+        $client = $this->getById($id);
+        if ($client->hasRole(User::ROLE_STAFF)) {
+            $client->removeRole(User::ROLE_CLIENT);
+            return true;
+        }
+        if ($client->image) {
+            $this->deleteImage($client->image);
+        }
+        return $client->delete();
     }
     public function uploadImage($image)
     {

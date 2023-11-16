@@ -34,4 +34,14 @@ Route::group(['middleware' => ['checkLogin']], function () {
             Route::post('/update/{id}', [UserController::class, 'staffUpdate'])->name('post.staff.update');
             Route::delete('/delete/{id}', [UserController::class, 'staffDelete'])->name('staff.delete');
         });
+        Route::prefix('client')
+        ->middleware('role:admin|staff')
+        ->group(function () {
+            Route::get('/', [UserController::class, 'client'])->name('client.list');
+            Route::get('/create', [UserController::class, 'getClientCreate'])->name('client.create');
+            Route::post('/create', [UserController::class, 'clientCreate'])->name('post.client.create');
+            Route::get('/update/{id}', [UserController::class, 'getClientUpdate'])->name('client.update');
+            Route::post('/update/{id}', [UserController::class, 'clientUpdate'])->name('post.client.update');
+            Route::delete('/delete/{id}', [UserController::class, 'clientDelete'])->name('client.delete');
+        });
 });
