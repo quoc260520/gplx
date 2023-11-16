@@ -39,3 +39,7 @@ function confirmation(event) {
             }
         });
 }
+$(document).ready(function () {
+    $('#gplx_user_id').select2();
+    $('#gplx_supplier_id').select2();
+});

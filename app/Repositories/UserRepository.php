@@ -69,6 +69,20 @@ class UserRepository
                     ];
                 }
             }
+$checkUniquePhone = $data->phone ? $this->model->where('phone', $data->phone)->count() : 0;
+            $checkUniqueCccd = $data->cccd ? $this->model->where('cccd', $data->cccd)->count() : 0;
+            if ($checkUniquePhone > 0) {
+                return [
+                    'flag' => false,
+                    'message' => 'Số điện thoại đã tồn tại',
+                ];
+            }
+            if ($checkUniqueCccd > 0) {
+                return [
+                    'flag' => false,
+                    'message' => 'CCCD/CMND đã tồn tại',
+                ];
+            }
             $staff = $this->model->create([
                 'email' => $data->email,
                 'password' => Hash::make($data->password),
@@ -118,6 +132,30 @@ class UserRepository
                         'message' => 'Cập nhật nhân viên thành công',
                     ];
                 }
+            }
+$checkUniquePhone = $data->phone
+                ? $this->model
+                    ->where('phone', $data->phone)
+                    ->where('id', '<>', $id)
+                    ->count()
+                : 0;
+            $checkUniqueCccd = $data->cccd
+                ? $this->model
+                    ->where('cccd', $data->cccd)
+                    ->where('id', '<>', $id)
+                    ->count()
+                : 0;
+            if ($checkUniquePhone > 0) {
+                return [
+                    'flag' => false,
+                    'message' => 'Số điện thoại đã tồn tại',
+                ];
+            }
+            if ($checkUniqueCccd > 0) {
+                return [
+                    'flag' => false,
+                    'message' => 'CCCD/CMND đã tồn tại',
+                ];
             }
             $staff = $this->getById($id);
             $staff->update([
@@ -181,6 +219,20 @@ class UserRepository
                     ];
                 }
             }
+$checkUniquePhone = $data->phone ? $this->model->where('phone', $data->phone)->count() : 0;
+            $checkUniqueCccd = $data->cccd ? $this->model->where('cccd', $data->cccd)->count() : 0;
+            if ($checkUniquePhone > 0) {
+                return [
+                    'flag' => false,
+                    'message' => 'Số điện thoại đã tồn tại',
+                ];
+            }
+            if ($checkUniqueCccd > 0) {
+                return [
+                    'flag' => false,
+                    'message' => 'CCCD/CMND đã tồn tại',
+                ];
+            }
             $staff = $this->model->create([
                 'email' => $data->email,
                 'password' => Hash::make($data->password),
@@ -229,6 +281,30 @@ class UserRepository
                         'message' => 'Cập nhật khách hàng thành công',
                     ];
                 }
+            }
+$checkUniquePhone = $data->phone
+                ? $this->model
+                    ->where('phone', $data->phone)
+                    ->where('id', '<>', $id)
+                    ->count()
+                : 0;
+            $checkUniqueCccd = $data->cccd
+                ? $this->model
+                    ->where('cccd', $data->cccd)
+                    ->where('id', '<>', $id)
+                    ->count()
+                : 0;
+            if ($checkUniquePhone > 0) {
+                return [
+                    'flag' => false,
+                    'message' => 'Số điện thoại đã tồn tại',
+                ];
+            }
+            if ($checkUniqueCccd > 0) {
+                return [
+                    'flag' => false,
+                    'message' => 'CCCD/CMND đã tồn tại',
+                ];
             }
             $staff = $this->getById($id);
             $staff->update([
