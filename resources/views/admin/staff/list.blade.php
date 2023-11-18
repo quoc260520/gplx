@@ -12,7 +12,7 @@
                     placeholder="Email">
                 <input class="form-control me-2 mr-4" type="number" name="" value="{{ $cccd ?? '' }}"
                     placeholder="CCCD/CMND">
-                <button class="btn btn-outline-success btn-sm" type="submit">Tìm kiếm</button>
+                <button class="btn btn-outline-success btn-sm" type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
     </nav>
@@ -49,7 +49,7 @@
                                         <a class="btn btn-danger btn-sm mr-3"
                                             href="{{ route('staff.delete', ['id' => $staff->id]) }}" title="Delete"
                                             onclick="confirmation(event)"><i class="fa fa-trash"></i></a>
-                                        <a href="{{ route('post.staff.update', ['id' => $staff->id]) }}"
+                                        <a href="{{ route('staff.update', ['id' => $staff->id]) }}"
                                             class="btn btn-primary btn-sm" title="Update"><i class="fa fa-pen"></i></a>
                                     </td>
                                 </tr>

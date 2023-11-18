@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('position_code')->nullable();
             $table->string('full_name');
             $table->string('address')->nullable();
-            $table->unsignedInteger('phone')->nullable();
-            $table->unsignedBigInteger('cccd')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('cccd')->nullable();
             $table->tinyInteger('sex')->nullable();
             $table->string('image')->nullable();
             $table->rememberToken();

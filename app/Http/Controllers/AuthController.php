@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DrivingLicense;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class AuthController extends Controller
 
     public function dashboard(Request $request)
     {
-        return view('admin.auth.profile');
+        $gplxByUser = DrivingLicense::where('user_id', Auth::user()->id)->count();
+        return view('admin.auth.profile')->with('gplxByUser', $gplxByUser);
     }
     public function logout(Request $request)
     {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DrivingLicenseController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +35,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
             Route::post('/update/{id}', [UserController::class, 'staffUpdate'])->name('post.staff.update');
             Route::delete('/delete/{id}', [UserController::class, 'staffDelete'])->name('staff.delete');
         });
-        Route::prefix('client')
+    Route::prefix('client')
         ->middleware('role:admin|staff')
         ->group(function () {
             Route::get('/', [UserController::class, 'client'])->name('client.list');
@@ -43,5 +44,16 @@ Route::group(['middleware' => ['checkLogin']], function () {
             Route::get('/update/{id}', [UserController::class, 'getClientUpdate'])->name('client.update');
             Route::post('/update/{id}', [UserController::class, 'clientUpdate'])->name('post.client.update');
             Route::delete('/delete/{id}', [UserController::class, 'clientDelete'])->name('client.delete');
+        });
+    Route::prefix('gplx')
+        ->middleware('role:admin|staff|client')
+        ->group(function () {
+            Route::get('/', [DrivingLicenseController::class, 'index'])->name('gplx.list');
+Route::get('show/{id}', [DrivingLicenseController::class, 'showModal'])->name('gplx.show');
+            Route::get('/create', [DrivingLicenseController::class, 'create'])->name('gplx.create');
+            Route::post('/create', [DrivingLicenseController::class, 'store'])->name('post.gplx.create');
+            Route::get('/update/{id}', [DrivingLicenseController::class, 'show'])->name('gplx.update');
+            Route::post('/update/{id}', [DrivingLicenseController::class, 'update'])->name('post.gplx.update');
+            Route::delete('/delete/{id}', [DrivingLicenseController::class, 'destroy'])->name('gplx.delete');
         });
 });

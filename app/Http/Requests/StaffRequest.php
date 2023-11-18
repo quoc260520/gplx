@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StaffRequest extends FormRequest
 {
@@ -23,7 +24,7 @@ class StaffRequest extends FormRequest
     {
         return [
             'email' => 'required|email',
-            'password' => 'required|string|min:6|max:8',
+            'password' => [Rule::requiredIf(is_null($this->id)), 'nullable', 'string', 'min:6', 'max:12'],
             'position_code' => 'nullable|string',
             'full_name' => 'required|string',
             'address' => 'nullable|string',

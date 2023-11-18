@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/ekko-lightbox/ekko-lightbox.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    @stack('styles')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
         integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
@@ -103,59 +104,60 @@
                                 </p>
                             </a>
                         </li>
+                        @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('staff'))
+                            <li class="nav-item {{ Route::is('staff.*') ? 'menu-is-opening menu-open' : '' }}">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Quản lý nhân viên
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('staff.list') }}"
+                                            class="nav-link {{ Route::is('staff.list') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Danh sách</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('staff.create') }}"
+                                            class="nav-link {{ Route::is('staff.create') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Thêm mới</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
 
-                        <li class="nav-item {{ Route::is('staff.*') ? 'menu-is-opening menu-open' : '' }}">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-user"></i>
-                                <p>
-                                    Quản lý nhân viên
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('staff.list') }}"
-                                        class="nav-link {{ Route::is('staff.list') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Danh sách</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('staff.create') }}"
-                                        class="nav-link {{ Route::is('staff.create') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm mới</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item {{ Route::is('client.*') ? 'menu-is-opening menu-open' : '' }}">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-user"></i>
-                                <p>
-                                    Quản lý khách hàng
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('client.list') }}"
-                                        class="nav-link {{ Route::is('client.list') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Danh sách</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('client.create') }}"
-                                        class="nav-link {{ Route::is('client.create') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm mới</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
+                            <li class="nav-item {{ Route::is('client.*') ? 'menu-is-opening menu-open' : '' }}">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Quản lý khách hàng
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('client.list') }}"
+                                            class="nav-link {{ Route::is('client.list') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Danh sách</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('client.create') }}"
+                                            class="nav-link {{ Route::is('client.create') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Thêm mới</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                        <li class="nav-item {{ Route::is('gplx.*') ? 'menu-is-opening menu-open' : '' }}">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon far fa-credit-card"></i>
                                 <p>
@@ -165,17 +167,21 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item active">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ route('gplx.list') }}"
+                                        class="nav-link {{ Route::is('gplx.list') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh sách</p>
                                     </a>
                                 </li>
+@if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('staff'))
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{ route('gplx.create') }}"
+                                        class="nav-link {{ Route::is('gplx.create') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm mới</p>
                                     </a>
                                 </li>
+@endif
                             </ul>
                         </li>
                         </li>
@@ -237,6 +243,7 @@
             });
         })
     </script>
+    @stack('scripts')
 </body>
 
 </html>

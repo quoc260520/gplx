@@ -25,16 +25,13 @@
                                             <p class="text-muted">{{ Auth::user()->email }}</p>
                                         </div>
                                     </div>
-                                    <h6>Projects</h6>
+                                    <h6>Họ tên</h6>
+<p class="text-muted">{{ Auth::user()->full_name }}</p>
                                     <hr class="mt-0 mb-4">
                                     <div class="row pt-1">
                                         <div class="col-6 mb-3">
-                                            <h6>Recent</h6>
-                                            <p class="text-muted">Lorem ipsum</p>
-                                        </div>
-                                        <div class="col-6 mb-3">
-                                            <h6>Most Viewed</h6>
-                                            <p class="text-muted">Dolor sit amet</p>
+                                            <h6>Tổng số GPLX</h6>
+                                            <p class="text-muted">{{ $gplxByUser }}</p>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-start">
