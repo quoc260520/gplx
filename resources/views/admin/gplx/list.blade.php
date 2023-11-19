@@ -65,7 +65,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="d-flex justify-content-end">{{ $gplxs->withQueryString()->links() }}</div>
+            <div class="d-flex justify-content-center">{{ $gplxs->withQueryString()->links() }}</div>
         </div>
     </div>
     <div class="modal fade" id="modalGplx" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -143,7 +143,8 @@
                     $('#start_date_modal').val(formatDate(data.start_date))
                     $('#end_date_modal').val(formatDate(data.end_date))
                     $('#issued_by_modal').val(data.issued_by)
-                    $('#status_modal').val(data.status > 0 ? 'Hết hạn' : 'Còn hạn')
+                    $('#status_modal').val(data.status > 0 ? (data.status == 1 ? 'Còn hạn' : 'Hết hạn') :
+                        'Vô thời hạn')
                     $('#modalGplx').modal('show')
                 },
                 error: function(error) {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DrivingLicense;
+use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,18 @@ class AuthController extends Controller
     public function dashboard(Request $request)
     {
         $gplxByUser = DrivingLicense::where('user_id', Auth::user()->id)->count();
-        return view('admin.auth.profile')->with('gplxByUser', $gplxByUser);
+        $countStaff = User::role(User::ROLE_STAFF)->count();
+        $countClient = User::role(User::ROLE_CLIENT)->count();
+        $allGplxActive = DrivingLicense::where('status', DrivingLicense::STATUS_ACTIVE)->count();
+        $allGplxDeactive = DrivingLicense::where('status', DrivingLicense::STATUS_DEACTIVE)->count();
+        $allSupplier = Supplier::count();
+        return view('admin.auth.profile')
+            ->withGplxByUser($gplxByUser)
+            ->withCountStaff($countStaff)
+            ->withCountClient($countClient)
+            ->withGplxActive($allGplxActive)
+            ->withAllSupplier($allSupplier)
+            ->withGplxDeactive($allGplxDeactive);
     }
 
     public function register(Request $request)

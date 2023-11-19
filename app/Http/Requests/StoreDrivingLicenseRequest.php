@@ -29,9 +29,9 @@ class StoreDrivingLicenseRequest extends FormRequest
             'kind' => ['required', Rule::in(DrivingLicense::DRIVING_LICENSE_KIND)],
             'driving_licenses_code' => 'required|numeric|regex:/^([0-9\s\-\+\(\)]*)$/|digits:12',
             'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
+            'end_date' => [Rule::requiredIf(in_array($this->status, [1,2])),'nullable','date','after:start_date'],
             'issued_by' => 'required|string',
-            'status' => 'required|integer|in:0,1',
+            'status' => 'required|integer|in:0,1,2',
         ];
     }
     public function attributes(): array

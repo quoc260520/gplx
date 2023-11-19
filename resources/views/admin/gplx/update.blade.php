@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('content')
-@push('styles')
+    @push('styles')
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @endpush
     @push('scripts')
@@ -119,11 +119,13 @@
                                         </div>
                                     @endif
                                 </div>
-                                                            <div class="mb-3">
+                                <div class="mb-3">
                                     <label for="status" class="form-label">Trạng thái</label>
                                     <select class="form-select" name="status" id="status">
-                                    <option value="0" {{ $gplx->status == 0 ? 'selected' : '' }}>Còn hạn</option>
-                                        <option value="1" {{ $gplx->status == 1 ? 'selected' : '' }}>Hết hạn</option>
+                                        <option value="0" {{ $gplx->status == 0 ? 'selected' : '' }}>Vô thời hạn
+                                        </option>
+                                        <option value="1" {{ $gplx->status == 1 ? 'selected' : '' }}>Còn hạn</option>
+                                        <option value="2" {{ $gplx->status == 2 ? 'selected' : '' }}>Hết hạn</option>
                                     </select>
                                     @if ($errors->has('status'))
                                         <div class="mes-feedback">
@@ -142,7 +144,7 @@
         </div>
     </body>
     <script type="text/javascript" src="{{ URL::asset('dist/js/custom/users.js') }}"></script>
-<script>
+    <script>
         $(document).ready(function() {
             $('#gplx_user_id').val({{ old('user_id') ?? $gplx->user_id }}).trigger('change');
             $("#gplx_supplier_id").val({{ old('supplier_id') ?? $gplx->supplier_id }}).trigger('change');
