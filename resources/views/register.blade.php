@@ -1,3 +1,8 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
 <!DOCTYPE html>
 <html>
 
@@ -18,24 +23,25 @@
             <span class="toast-content bg-danger">{{ $errors->first() }}</span>
         </div>
     @endif
-    @if ($success ?? '')
-        <div class="position-fixed justify-content-center top-0 toast" id="notification">
-            <span class="toast-content bg-success">{{ $success }}</span>
-        </div>
-    @endif
 
     <div class="container">
         <div class="d-flex justify-content-center h-100">
             <div class="card">
                 <div class="card-header">
-                    <h3>Sign In</h3>
+                    <h3>TẠO TÀI KHOẢN</h3>
                 </div>
                 <div class="card-body">
-                    <form accept="{{ route('post.login') }}" enctype="multipart/form-data" method="post">
+                    <form accept="{{ route('post.register') }}" enctype="multipart/form-data" method="post">
                         @csrf
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control h-50" placeholder="Họ tên" name="full_name">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
                             </div>
                             <input type="text" class="form-control h-50" placeholder="Email" name="email">
 
@@ -46,15 +52,14 @@
                             </div>
                             <input type="password" class="form-control h-50" placeholder="Mật khẩu" name="password">
                         </div>
-                        <div class="d-flex justify-content-between">
-                            <div class="form-group" id='register'>
-                                <input type="button" value="Tạo Tài Khoản" class="btn float-right login_btn">
+                        <div class="d-flex justify-content-between algn-items-center">
+                            <div class="form-group" id='login'>
+                                <input type="button" value="Đăng Nhập" class="btn login_btn">
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Đăng Nhập" class="btn float-right login_btn">
+                                <input type="submit" value="Đăng Ký" class="btn login_btn">
                             </div>
                         </div>
-                        <div class="forgot" id='forgot'>Quên Mật Khẩu</div>
                     </form>
                 </div>
             </div>
@@ -75,12 +80,8 @@
         }, 3000);
     };
 
-    $("#register").click(function() {
-        window.location.href = '/register'
-    });
-
-    $("#forgot").click(function() {
-        window.location.href = '/forgot-password'
+    $("#login").click(function() {
+        window.location.href = '/login'
     });
 </script>
 <style>
@@ -124,13 +125,6 @@
     .container {
         height: 100%;
         align-content: center;
-    }
-
-    .forgot {
-        text-decoration: underline;
-        color: white;
-        float: right;
-        cursor: pointer;
     }
 
     .card {

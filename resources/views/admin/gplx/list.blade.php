@@ -43,15 +43,15 @@
                                     <td>{{ $gplx->user->full_name ?? '' }}</td>
                                     <td>{{ $gplx->driving_licenses_code ?? '' }}</td>
                                     <td>{{ $gplx->driving_licenses_kind ?? '' }}</td>
-                                                                        <td class="">
-@if (!Auth::user()->hasRole('client'))
-                                        <a class="btn btn-danger btn-sm mr-3"
-                                            href="{{ route('gplx.delete', ['id' => $gplx->id]) }}" title="Delete"
-                                            onclick="confirmation(event)"><i class="fa fa-trash"></i></a>
-                                        <a href="{{ route('gplx.update', ['id' => $gplx->id]) }}"
-                                            class="btn btn-primary btn-sm mr-3" title="Update"><i
+                                    <td class="">
+                                        @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('staff'))
+                                            <a class="btn btn-danger btn-sm mr-3"
+                                                href="{{ route('gplx.delete', ['id' => $gplx->id]) }}" title="Delete"
+                                                onclick="confirmation(event)"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('gplx.update', ['id' => $gplx->id]) }}"
+                                                class="btn btn-primary btn-sm mr-3" title="Update"><i
                                                     class="fa fa-pen"></i></a>
-@endif
+                                        @endif
                                         <button type="button" onclick="showModalGplx({{ $gplx->id }})"
                                             class="btn btn-success btn-sm"><i class="fa fa-eye"></i></button>
                                     </td>
@@ -68,7 +68,7 @@
             <div class="d-flex justify-content-end">{{ $gplxs->withQueryString()->links() }}</div>
         </div>
     </div>
-<div class="modal fade" id="modalGplx" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalGplx" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -119,7 +119,7 @@
 
     <script type="text/javascript" src="{{ URL::asset('dist/js/custom/users.js') }}"></script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
         function formatDate(date) {
             var currentDate = new Date(date);
             var day = currentDate.getDate();

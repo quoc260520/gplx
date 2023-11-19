@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\DrivingLicenseController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,12 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('post.login');
+
+Route::get('/register', function () {
+    return view('register');
+})->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('post.register');
+
 Route::group(['middleware' => ['checkLogin']], function () {
     Route::middleware('role:admin|staff|client')
         ->get('/', [AuthController::class, 'dashboard'])
@@ -49,7 +56,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
         ->middleware('role:admin|staff|client')
         ->group(function () {
             Route::get('/', [DrivingLicenseController::class, 'index'])->name('gplx.list');
-Route::get('show/{id}', [DrivingLicenseController::class, 'showModal'])->name('gplx.show');
+            Route::get('show/{id}', [DrivingLicenseController::class, 'showModal'])->name('gplx.show');
             Route::get('/create', [DrivingLicenseController::class, 'create'])->name('gplx.create');
             Route::post('/create', [DrivingLicenseController::class, 'store'])->name('post.gplx.create');
             Route::get('/update/{id}', [DrivingLicenseController::class, 'show'])->name('gplx.update');
@@ -57,3 +64,10 @@ Route::get('show/{id}', [DrivingLicenseController::class, 'showModal'])->name('g
             Route::delete('/delete/{id}', [DrivingLicenseController::class, 'destroy'])->name('gplx.delete');
         });
 });
+
+Route::get('/forgot-password', function () {
+    return view('forgot-password');
+})->name('forgot-password');
+Route::post('/forgot-password', [MailController::class, 'forgotPassWord'])->name('post.forgot');
+Route::get('/reset-password', [AuthController::class, 'getViewReset'])->name('get.reset');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('post.reset');
