@@ -31,7 +31,7 @@ class UserRepository
                 $query->where('email', 'like', ["%$email%"]);
             })
             ->when($full_name, function ($query, $full_name) {
-                $query->where('author_id', 'like', ["%$full_name%"]);
+                $query->where('full_name', 'like', ["%$full_name%"]);
             })
             ->when($phone, function ($query, $phone) {
                 $query->where('phone', 'like', ["%$phone%"]);

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\DrivingLicenseController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -63,6 +64,16 @@ Route::group(['middleware' => ['checkLogin']], function () {
             Route::post('/update/{id}', [DrivingLicenseController::class, 'update'])->name('post.gplx.update');
             Route::delete('/delete/{id}', [DrivingLicenseController::class, 'destroy'])->name('gplx.delete');
         });
+    Route::prefix('supplier')
+        ->middleware('role:admin|staff')
+        ->group(function () {
+            Route::get('/', [SupplierController::class, 'getViewSupplier'])->name('get.supplier');
+            Route::get('/create', [SupplierController::class, 'getViewCreateSupplier'])->name('post.supplier.view');
+            Route::post('/create', [SupplierController::class, 'createSupplier'])->name('post.supplier.action');
+            Route::get('/update/{id}', [SupplierController::class, 'getViewUpdate'])->name('update.supplier.view');
+            Route::post('/update/{id}', [SupplierController::class, 'updateSupplier'])->name('update.supplier.action');
+            Route::delete('/delete/{id}', [SupplierController::class, 'deleteSupplier'])->name('delete.supplier');
+        });
 });
 
 Route::get('/forgot-password', function () {
@@ -71,3 +82,4 @@ Route::get('/forgot-password', function () {
 Route::post('/forgot-password', [MailController::class, 'forgotPassWord'])->name('post.forgot');
 Route::get('/reset-password', [AuthController::class, 'getViewReset'])->name('get.reset');
 Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('post.reset');
+

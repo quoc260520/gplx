@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class DrivingLicense extends Model
 {
     use HasFactory, SoftDeletes;
+    const STATUS_ACTIVE = 0;
+    const STATUS_DEACTIVE = 1;
     const DRIVING_LICENSE_KIND = [
         1 => 'A1',
         2 => 'A2',
