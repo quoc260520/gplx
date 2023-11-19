@@ -156,9 +156,35 @@
                                     </li>
                                 </ul>
                             </li>
+
+                            <li class="nav-item {{ Route::is('staff.*') ? 'menu-is-opening menu-open' : '' }} nav-item active">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Quản lý nhà cung cấp
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('get.supplier') }}"
+                                            class="nav-link {{ Route::is('get.supplier') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Danh sách</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('post.supplier.view') }}"
+                                            class="nav-link {{ Route::is('post.supplier.view') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Thêm mới</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                         @endif
                         <li class="nav-item {{ Route::is('gplx.*') ? 'menu-is-opening menu-open' : '' }}">
-                            <a href="#" class="nav-link">
+                            <a href="" class="nav-link">
                                 <i class="nav-icon far fa-credit-card"></i>
                                 <p>
                                     Quản lý GPLX

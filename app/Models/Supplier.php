@@ -10,5 +10,6 @@ class Supplier extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = ['name', 'address', 'phone'];
+    const PAGINATE = 10;
 
 }
