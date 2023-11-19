@@ -25,5 +25,17 @@ class DrivingLicense extends Model
         12 => 'FD',
         13 => 'FE',
     ];
-    protected $fillable = [ 'user_id', 'supplier_id', 'driving_licenses_code', 'driving_licenses_kind', 'start_date', 'end_date', 'issued_by', 'status'];
+    protected $fillable = ['user_id', 'supplier_id', 'driving_licenses_code', 'driving_licenses_kind', 'start_date', 'end_date', 'issued_by', 'status'];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+}
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
+    public static function checkExistence($value)
+    {
+        return static::where('driving_licenses_code', $value)->exists();
+    }
 }
