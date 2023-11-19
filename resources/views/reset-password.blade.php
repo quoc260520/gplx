@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <head>
         <title>Reset Password</title>
 
@@ -10,7 +11,6 @@
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
             integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
 </head>
 
@@ -32,19 +32,20 @@
                     <h3>Reset Mật Khẩu</h3>
                 </div>
                 <div class="card-body">
-                    <form accept="{{ route('post.reset') }}" enctype="multipart/form-data" method="post">
+                    <form accept="{{ route('post.reset') }}" method="post">
                         @csrf
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" class="form-control" placeholder="password" name="password">
+                            <input type="password" class="form-control" placeholder="Mật khẩu" name="password">
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" class="form-control" placeholder="Nhập lại password" name="password_confirm">
+                            <input type="password" class="form-control" placeholder="Nhập lại password"
+                                name="password_confirmation">
                         </div>
                         <input type="hidden" value={{ $token }} name="token">
                         <div class="text-center">
@@ -175,4 +176,5 @@
         height: 50px !important;
     }
 </style>
+
 </html>

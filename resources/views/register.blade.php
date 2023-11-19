@@ -37,20 +37,20 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control h-50" placeholder="full_name" name="full_name">
+                            <input type="text" class="form-control h-50" placeholder="Họ tên" name="full_name">
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
                             </div>
-                            <input type="text" class="form-control h-50" placeholder="email" name="email">
+                            <input type="text" class="form-control h-50" placeholder="Email" name="email">
 
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" class="form-control h-50" placeholder="password" name="password">
+                            <input type="password" class="form-control h-50" placeholder="Mật khẩu" name="password">
                         </div>
                         <div class="d-flex justify-content-between algn-items-center">
                             <div class="form-group" id='login'>

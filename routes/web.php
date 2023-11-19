@@ -32,23 +32,6 @@ Route::group(['middleware' => ['checkLogin']], function () {
         ->get('/', [AuthController::class, 'dashboard'])
         ->name('home');
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
-    // Route::prefix('answers')
-    //     ->middleware('role:admin')
-    //     ->group(function () {
-    //         Route::get('list', [QuestionController::class, 'index'])->name('answer.list');
-    //         Route::get('create', [QuestionController::class, 'create'])->name('answer.create');
-    //         Route::post('create', [QuestionController::class, 'postCreate'])->name('answer.post.create');
-    //     });
-});
-
-Route::get('/forgot-password', function(){
-    return view('forgot-password');
-})->name('forgot-password');
-Route::post('/forgot-password', [MailController::class, 'forgotPassWord'])->name('post.forgot');
-
-
-Route::get('/reset-password', [AuthController::class, 'getViewReset'])->name('get.reset');
-Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('post.reset');
     Route::prefix('staff')
         ->middleware('role:admin|staff')
         ->group(function () {
@@ -73,10 +56,18 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('
         ->middleware('role:admin|staff|client')
         ->group(function () {
             Route::get('/', [DrivingLicenseController::class, 'index'])->name('gplx.list');
-Route::get('show/{id}', [DrivingLicenseController::class, 'showModal'])->name('gplx.show');
+            Route::get('show/{id}', [DrivingLicenseController::class, 'showModal'])->name('gplx.show');
             Route::get('/create', [DrivingLicenseController::class, 'create'])->name('gplx.create');
             Route::post('/create', [DrivingLicenseController::class, 'store'])->name('post.gplx.create');
             Route::get('/update/{id}', [DrivingLicenseController::class, 'show'])->name('gplx.update');
             Route::post('/update/{id}', [DrivingLicenseController::class, 'update'])->name('post.gplx.update');
             Route::delete('/delete/{id}', [DrivingLicenseController::class, 'destroy'])->name('gplx.delete');
         });
+});
+
+Route::get('/forgot-password', function () {
+    return view('forgot-password');
+})->name('forgot-password');
+Route::post('/forgot-password', [MailController::class, 'forgotPassWord'])->name('post.forgot');
+Route::get('/reset-password', [AuthController::class, 'getViewReset'])->name('get.reset');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('post.reset');
