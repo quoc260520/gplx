@@ -74,7 +74,7 @@
                                     @endif
                                 </div>
                                 <div class="mb-3">
-                                    <label for="driving_licenses_code" class="form-label">Mã GPLX<span
+                                    <label for="driving_licenses_code" class="form-label">Số GPLX<span
                                             class="text-red">(*)(12 số)</span></label>
                                     <input type="text" class="form-control" id="driving_licenses_code"
                                         name="driving_licenses_code"
@@ -101,7 +101,7 @@
                                         <span class="text-red">(*)</span>
                                     </label>
                                     <input type="date" class="form-control" id="end_date" name="end_date"
-                                        value="{{ old('end_date') ?? date_format(date_create($gplx->end_date), 'Y-m-d') }}">
+                                        value="{{ old('end_date') ?? ($gplx->end_date ? date_format(date_create($gplx->end_date), 'Y-m-d') : '') }}">
                                     @if ($errors->has('end_date'))
                                         <div class="mes-feedback">
                                             {{ $errors->first('end_date') }}

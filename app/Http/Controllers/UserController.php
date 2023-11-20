@@ -17,23 +17,25 @@ class UserController extends Controller
     }
     public function staff(Request $request)
     {
-        [$staffs, $email, $full_name, $phone, $cccd] = $this->userRepository->getAll($request, User::ROLE_STAFF);
+        [$staffs, $email, $full_name, $phone, $cccd, $driving_licenses_code] = $this->userRepository->getAll($request, User::ROLE_STAFF);
         return view('admin.staff.list')
             ->withStaffs($staffs)
             ->withEmail($email)
             ->withFullName($full_name)
             ->withPhone($phone)
-            ->withCccd($cccd);
+            ->withCccd($cccd)
+            ->withDrivingLicensesCode($driving_licenses_code);
     }
     public function client(Request $request)
     {
-        [$clients, $email, $full_name, $phone, $cccd] = $this->userRepository->getAll($request, User::ROLE_CLIENT);
+        [$clients, $email, $full_name, $phone, $cccd, $driving_licenses_code] = $this->userRepository->getAll($request, User::ROLE_CLIENT);
         return view('admin.client.list')
             ->withClients($clients)
             ->withEmail($email)
             ->withFullName($full_name)
             ->withPhone($phone)
-            ->withCccd($cccd);
+            ->withCccd($cccd)
+            ->withDrivingLicensesCode($driving_licenses_code);
     }
     public function getStaffCreate(Request $request)
     {

@@ -10,8 +10,10 @@
                     placeholder="Số điện thoại">
                 <input class="form-control me-2 mr-4" type="text" name="email" value="{{ $email ?? '' }}"
                     placeholder="Email">
-                <input class="form-control me-2 mr-4" type="number" name="" value="{{ $cccd ?? '' }}"
+                <input class="form-control me-2 mr-4" type="number" name="cccd" value="{{ $cccd ?? '' }}"
                     placeholder="CCCD/CMND">
+                <input class="form-control me-2 mr-4" type="number" name="driving_licenses_code" value="{{ $drivingLicensesCode ?? '' }}"
+                    placeholder="Số GPLX">
                 <button class="btn btn-outline-success btn-sm" type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
@@ -48,7 +50,8 @@
                                             href="{{ route('client.delete', ['id' => $client->id]) }}" title="Delete"
                                             onclick="confirmation(event)"><i class="fa fa-trash"></i> Xóa</a>
                                         <a href="{{ route('client.update', ['id' => $client->id]) }}"
-                                            class="btn btn-primary btn-sm" title="Update"><i class="fa fa-pen"></i> Chỉnh Sửa</a>
+                                            class="btn btn-primary btn-sm" title="Update"><i class="fa fa-pen"></i> Chỉnh
+                                            Sửa</a>
                                     </td>
                                 </tr>
                             @endforeach

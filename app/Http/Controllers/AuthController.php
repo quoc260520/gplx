@@ -13,10 +13,16 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $validated = $request->validate([
-            'email' => 'required|email|exists:users,email',
-            'password' => 'required|min:6',
-        ]);
+        $validated = $request->validate(
+            [
+                'email' => 'required|email|exists:users,email',
+                'password' => 'required|min:6',
+            ],
+            [],
+            [
+                'password' => 'mật khẩu',
+            ],
+        );
         $user = User::where('email', $request->get('email'))->first();
         if (!$user || !Auth::attempt($request->only(['email', 'password']))) {
             return back()->withErrors('Mật khẩu không chính xác');
@@ -34,7 +40,7 @@ class AuthController extends Controller
         $gplxByUser = DrivingLicense::where('user_id', Auth::user()->id)->count();
         $countStaff = User::role(User::ROLE_STAFF)->count();
         $countClient = User::role(User::ROLE_CLIENT)->count();
-        $allGplxActive = DrivingLicense::where('status', DrivingLicense::STATUS_ACTIVE)->count();
+        $allGplxActive = DrivingLicense::whereIn('status', [DrivingLicense::STATUS_ACTIVE, DrivingLicense::STATUS_UNLIMITED])->count();
         $allGplxDeactive = DrivingLicense::where('status', DrivingLicense::STATUS_DEACTIVE)->count();
         $allSupplier = Supplier::count();
         return view('admin.auth.profile')
@@ -48,11 +54,19 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $validated = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-            'full_name' => 'required',
-        ]);
+        $validated = $request->validate(
+            [
+                'email' => 'required|email',
+                'password' => 'required|min:6',
+                'full_name' => 'required',
+            ],
+            [],
+            [
+                'email' => 'email',
+                'password' => 'mật khẩu',
+                'full_name' => 'họ tên',
+            ],
+        );
         $user = User::where('email', $request->get('email'))->first();
         if ($user) {
             return back()->withErrors('Tài khoản đã tồn tại!');
@@ -84,11 +98,19 @@ class AuthController extends Controller
 
     public function resetPassword(Request $request)
     {
-        $validate = $request->validate([
-            'password' => 'required|min:6',
-            'password_confirmation' => 'required|min:6|same:password',
-            'token' => 'required',
-        ]);
+        $validate = $request->validate(
+            [
+                'password' => 'required|min:6',
+                'password_confirmation' => 'required|min:6|same:password',
+                'token' => 'required',
+            ],
+            [],
+            [
+                'password' => 'mật khẩu',
+                'password_confirmation' => 'mật khẩu nhập lại',
+                'token' => 'token',
+            ],
+        );
         try {
             $user = User::where('remember_token', $request->token)->first();
             if (!$user) {

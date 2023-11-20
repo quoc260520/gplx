@@ -3,6 +3,7 @@
 namespace App\Repositories;
 use Illuminate\Support\Str;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -23,6 +24,7 @@ class UserRepository
         $full_name = $request->full_name;
         $phone = $request->phone;
         $cccd = $request->cccd;
+        $driving_licenses_code = $request->driving_licenses_code;
 
         $users = $this->model
             ::role($role)
@@ -37,11 +39,16 @@ class UserRepository
                 $query->where('phone', 'like', ["%$phone%"]);
             })
             ->when($cccd, function ($query, $cccd) {
-                $query->where('cccd', ["%$cccd%"]);
+                $query->where('cccd', 'like', ["%$cccd%"]);
+            })
+            ->when($driving_licenses_code, function ($query, $driving_licenses_code) {
+                $query->whereHas('drivingLicenses', function (Builder $q) use ($driving_licenses_code) {
+                    $q->where('driving_licenses_code', 'like', ["%$driving_licenses_code%"]);
+                });
             })
             ->orderByDesc('created_at')
             ->paginate(User::PAGINATE);
-        return [$users, $email, $full_name, $phone, $cccd];
+        return [$users, $email, $full_name, $phone, $cccd, $driving_licenses_code];
     }
     public function getById($id)
     {

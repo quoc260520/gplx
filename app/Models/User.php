@@ -22,9 +22,6 @@ class User extends Authenticatable
     const FEMALE = 1;
     const PAGINATE = 20;
 
-
-
-
     /**
      * The attributes that are mass assignable.
      *
@@ -51,5 +48,9 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->hasRole('admin');
+    }
+    public function drivingLicenses()
+    {
+        return $this->hasMany(DrivingLicense::class, 'user_id');
     }
 }

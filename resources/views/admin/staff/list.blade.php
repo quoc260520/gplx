@@ -10,7 +10,7 @@
                     placeholder="Số điện thoại">
                 <input class="form-control me-2 mr-4" type="text" name="email" value="{{ $email ?? '' }}"
                     placeholder="Email">
-                <input class="form-control me-2 mr-4" type="number" name="" value="{{ $cccd ?? '' }}"
+                <input class="form-control me-2 mr-4" type="number" name="cccd" value="{{ $cccd ?? '' }}"
                     placeholder="CCCD/CMND">
                 <button class="btn btn-outline-success btn-sm" type="submit"><i class="fa fa-search"></i></button>
             </form>

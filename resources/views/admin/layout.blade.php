@@ -74,7 +74,7 @@
             <a class="brand-link text-decoration-none">
                 <img src="{{ asset('/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">GPLX</span>
+                <span class="brand-text font-weight-light">Quản Lý GPLX</span>
             </a>
 
             <!-- Sidebar -->

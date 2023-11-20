@@ -72,7 +72,7 @@
                                     @endif
                                 </div>
                                 <div class="mb-3">
-                                    <label for="driving_licenses_code" class="form-label">Mã GPLX<span
+                                    <label for="driving_licenses_code" class="form-label">Số GPLX<span
                                             class="text-red">(*)(12 số)</span></label>
                                     <input type="text" class="form-control" id="driving_licenses_code"
                                         name="driving_licenses_code"

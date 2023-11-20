@@ -68,7 +68,7 @@
 
     html,
     body {
-        background-image: url('/dist/img/background.jpg');
+        background-image: url('/dist/img/background.png');
         background-size: cover;
         background-repeat: no-repeat;
         height: 100%;

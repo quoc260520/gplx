@@ -5,7 +5,7 @@
         <div class="container">
             <form action="{{ route('gplx.list') }}" class="d-flex" method="GET">
                 <input class="form-control me-2 mr-4" type="text" name="driving_licenses_code"
-                    value="{{ $driving_licenses_code ?? '' }}" placeholder="Mã GPLX">
+                    value="{{ $driving_licenses_code ?? '' }}" placeholder="Số GPLX">
                 <input class="form-control me-2 mr-4" type="number" name="cccd" value="{{ $cccd ?? '' }}"
                     placeholder="CCCD/CMND">
                 <select class="form-control form-select me-2 mr-4" name="kind">
@@ -30,7 +30,7 @@
                         <tr>
                             <th style="width:5%;" scope="col">STT</th>
                             <th style="width:25%;" scope="col">Khách hàng</th>
-                            <th style="width:20%" scope="col">Mã GPLX</th>
+                            <th style="width:20%" scope="col">Số GPLX</th>
                             <th style="width:10%" scope="col">Loại GPLX</th>
                             <th style="width:30%" scope="col">Thao tác</th>
                         </tr>
@@ -49,8 +49,8 @@
                                                 href="{{ route('gplx.delete', ['id' => $gplx->id]) }}" title="Delete"
                                                 onclick="confirmation(event)"><i class="fa fa-trash"></i> Xóa</a>
                                             <a href="{{ route('gplx.update', ['id' => $gplx->id]) }}"
-                                                class="btn btn-primary btn-sm mr-3" title="Update"><i
-                                                    class="fa fa-pen"></i> Chỉnh Sửa</a>
+                                                class="btn btn-primary btn-sm mr-3" title="Update"><i class="fa fa-pen"></i>
+                                                Chỉnh Sửa</a>
                                         @endif
                                         <button type="button" onclick="showModalGplx({{ $gplx->id }})"
                                             class="btn btn-success btn-sm"><i class="fa fa-eye"></i> Xem</button>
@@ -81,7 +81,7 @@
                         <input type="text" class="form-control" id="fullname_modal" disabled>
                     </div>
                     <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label">Mã GPLX</label>
+                        <label for="recipient-name" class="col-form-label">Số GPLX</label>
                         <input type="text" class="form-control" id="code_modal" disabled>
                     </div>
                     <div class="mb-3">
@@ -141,7 +141,7 @@
                     $('#kind_modal').val(data.driving_licenses_kind)
                     $('#supplier_modal').val(data.supplier.name)
                     $('#start_date_modal').val(formatDate(data.start_date))
-                    $('#end_date_modal').val(formatDate(data.end_date))
+                    $('#end_date_modal').val(data.end_date ? formatDate(data.end_date) : '---')
                     $('#issued_by_modal').val(data.issued_by)
                     $('#status_modal').val(data.status > 0 ? (data.status == 1 ? 'Còn hạn' : 'Hết hạn') :
                         'Vô thời hạn')
