@@ -62,7 +62,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="d-flex justify-content-end">{{ $staffs->withQueryString()->links() }}</div>
+            <div class="d-flex justify-content-center">{{ $staffs->withQueryString()->links() }}</div>
         </div>
     </div>
 

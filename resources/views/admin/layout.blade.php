@@ -219,7 +219,7 @@
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper" style="background: linear-gradient(130deg, rgba(255,163,34,0.5802696078431373) 0%, rgba(249,238,228,1) 100%)">
+        <div class="content-wrapper" style="background: linear-gradient(130deg, rgba(142,250,251,0.5802696078431373) 0%, rgba(180,236,223,1) 30%, rgba(172,255,182,1) 48%, rgba(124,216,178,1) 68%, rgba(119,255,171,1) 100%);">
             <!-- Content Header (Page header) -->
             @include('message')
             <!-- Main content -->

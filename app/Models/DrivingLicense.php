@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class DrivingLicense extends Model
 {
     use HasFactory, SoftDeletes;
-    const STATUS_ACTIVE = 0;
-    const STATUS_DEACTIVE = 1;
+    const STATUS_UNLIMITED = 0;
+    const STATUS_ACTIVE = 1;
+    const STATUS_DEACTIVE = 2;
     const DRIVING_LICENSE_KIND = [
         1 => 'A1',
         2 => 'A2',
@@ -31,7 +32,7 @@ class DrivingLicense extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-}
+    }
     public function supplier()
     {
         return $this->belongsTo(Supplier::class);

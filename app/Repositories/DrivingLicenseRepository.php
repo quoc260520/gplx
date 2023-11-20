@@ -54,7 +54,10 @@ class DrivingLicenseRepository
         try {
             $countGplx = $this->model
                 ->where('status', DrivingLicense::STATUS_ACTIVE)
-                ->whereDate('end_date', '>', Carbon::now())
+                ->where('status', DrivingLicense::STATUS_UNLIMITED)
+                ->where(function ($query)  {
+                    $query->whereDate('end_date', '>', Carbon::now())->orWhereNull('end_date');
+                })
                 ->where('user_id', $data['user_id'])
                 ->where(function ($query) use ($data) {
                     $query->where('driving_licenses_code', $data['driving_licenses_code'])->orWhere('driving_licenses_kind', $data['kind']);
@@ -62,8 +65,11 @@ class DrivingLicenseRepository
                 ->count();
 
             $countGplxAll = $this->model
-                ->where('status', DrivingLicense::STATUS_ACTIVE)
-                ->whereDate('end_date', '>', Carbon::now())
+            ->where('status', DrivingLicense::STATUS_ACTIVE)
+            ->where('status', DrivingLicense::STATUS_UNLIMITED)
+            ->where(function ($query)  {
+                $query->whereDate('end_date', '>', Carbon::now())->orWhereNull('end_date');
+            })
                 ->where('driving_licenses_code', $data['driving_licenses_code'])
                 ->where('driving_licenses_kind', $data['kind'])
                 ->where('user_id', '<>', $data['user_id'])
@@ -102,8 +108,11 @@ class DrivingLicenseRepository
             $drivingLicense = $this->getById($id);
 
             $countGplx = $this->model
-                ->where('status', DrivingLicense::STATUS_ACTIVE)
-                ->whereDate('end_date', '>', Carbon::now())
+            ->where('status', DrivingLicense::STATUS_ACTIVE)
+            ->where('status', DrivingLicense::STATUS_UNLIMITED)
+            ->where(function ($query) {
+                $query->whereDate('end_date', '>', Carbon::now())->orWhereNull('end_date');
+            })
                 ->where('user_id', $data['user_id'])
                 ->where('id', '<>', $id)
                 ->where(function ($query) use ($data) {
@@ -112,8 +121,11 @@ class DrivingLicenseRepository
                 ->count();
 
             $countGplxAll = $this->model
-                ->where('status', DrivingLicense::STATUS_ACTIVE)
-                ->whereDate('end_date', '>', Carbon::now())
+            ->where('status', DrivingLicense::STATUS_ACTIVE)
+            ->where('status', DrivingLicense::STATUS_UNLIMITED)
+            ->where(function ($query)  {
+                $query->whereDate('end_date', '>', Carbon::now())->orWhereNull('end_date');
+            })
                 ->where('driving_licenses_code', $data['driving_licenses_code'])
                 ->where('user_id', '<>', $data['user_id'])
                 ->count();

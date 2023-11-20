@@ -69,7 +69,7 @@ class UserRepository
                     ];
                 }
             }
-$checkUniquePhone = $data->phone ? $this->model->where('phone', $data->phone)->count() : 0;
+            $checkUniquePhone = $data->phone ? $this->model->where('phone', $data->phone)->count() : 0;
             $checkUniqueCccd = $data->cccd ? $this->model->where('cccd', $data->cccd)->count() : 0;
             if ($checkUniquePhone > 0) {
                 return [
@@ -133,7 +133,7 @@ $checkUniquePhone = $data->phone ? $this->model->where('phone', $data->phone)->c
                     ];
                 }
             }
-$checkUniquePhone = $data->phone
+            $checkUniquePhone = $data->phone
                 ? $this->model
                     ->where('phone', $data->phone)
                     ->where('id', '<>', $id)
@@ -219,7 +219,7 @@ $checkUniquePhone = $data->phone
                     ];
                 }
             }
-$checkUniquePhone = $data->phone ? $this->model->where('phone', $data->phone)->count() : 0;
+            $checkUniquePhone = $data->phone ? $this->model->where('phone', $data->phone)->count() : 0;
             $checkUniqueCccd = $data->cccd ? $this->model->where('cccd', $data->cccd)->count() : 0;
             if ($checkUniquePhone > 0) {
                 return [
@@ -282,7 +282,7 @@ $checkUniquePhone = $data->phone ? $this->model->where('phone', $data->phone)->c
                     ];
                 }
             }
-$checkUniquePhone = $data->phone
+            $checkUniquePhone = $data->phone
                 ? $this->model
                     ->where('phone', $data->phone)
                     ->where('id', '<>', $id)

@@ -120,8 +120,9 @@
                                 <div class="mb-3">
                                     <label for="status" class="form-label">Trạng thái</label>
                                     <select class="form-select" name="status" id="status">
-                                        <option value="0">Còn hạn</option>
-                                        <option value="1">Hết hạn</option>
+                                        <option value="0">Vô thời hạn</option>
+                                        <option value="1">Còn hạn</option>
+                                        <option value="2">Hết hạn</option>
                                     </select>
                                     @if ($errors->has('status'))
                                         <div class="mes-feedback">
@@ -140,7 +141,7 @@
         </div>
     </body>
     <script type="text/javascript" src="{{ URL::asset('dist/js/custom/users.js') }}"></script>
-<script>
+    <script>
         $(document).ready(function() {
             $('#gplx_user_id').val({{ old('user_id') ?? 0 }}).trigger('change');
             $("#gplx_supplier_id").val({{ old('supplier_id') ?? 0 }}).trigger('change');
