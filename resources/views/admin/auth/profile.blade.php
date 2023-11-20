@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('content')
-    <section class="vh-100" style="linear-gradient(130deg, rgba(142,250,251,0.5802696078431373) 0%, rgba(133,200,209,1) 30%, rgba(193,255,247,1) 48%, rgba(124,216,178,1) 68%, rgba(119,255,171,1) 100%);">
+    <section class="vh-100" style="background: linear-gradient(171deg, rgba(214,215,255,0.5802696078431373) 0%, rgb(218, 225, 250) 100%);">
         <div class="container py-5 h-100">
             @if (!(Auth::user()->hasRole('staff') || Auth::user()->hasRole('admin')))
                 <div class="row d-flex justify-content-center align-items-center h-100">
