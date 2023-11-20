@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
-    <section class="vh-100" style="background-color: #f4f5f7;">
+    <section class="vh-100" style="background-color: linear-gradient(130deg, rgba(255,163,34,0.5802696078431373) 0%, rgba(249,238,228,1) 100%);">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-lg-6 mb-4 mb-lg-0">

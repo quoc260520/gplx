@@ -23,12 +23,12 @@
                             <td class="d-flex">
                                 <a href="{{ route('update.supplier.view', ['id' => $supplier->id]) }}"
                                     class="btn btn-primary btn-sm mr-3 d-flex align-items-center" title="Update"><i class="fa fa-pen"></i>
-                                    update
+                                     Chỉnh Sửa
                                 </a>
                                 <a href="{{ route('delete.supplier', ['id' => $supplier->id]) }}"
                                     onclick="confirmation(event)"
                                     class="btn btn-danger btn-sm mr-3 d-flex align-items-center" title="delete"><i class="fa fa-trash"></i>
-                                    delete
+                                     Xóa
                                 </a>
                             </td>
                         </tr>

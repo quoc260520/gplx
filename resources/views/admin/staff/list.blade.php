@@ -20,18 +20,18 @@
 
     <div class="mt-5 ps-5 pe-5">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12" style="overflow-x: auto; max-width: 80vw">
                 <table class="table table-striped border border-2">
                     <thead>
                         <tr>
-                            <th style="width:5%;" scope="col">STT</th>
-                            <th style="width:10%;" scope="col">Mã nhân viên</th>
-                            <th style="width:15%" scope="col">Email</th>
-                            <th style="width:15%" scope="col">Họ tên</th>
-                            <th style="width:10%;" scope="col">Số điện thoại</th>
-                            <th style="width:10%;" scope="col">CCCD/CMND</th>
-                            <th style="width:25%" scope="col">Địa chỉ</th>
-                            <th style="width:10%;" scope="col">Thao tác</th>
+                            <th style="min-width: 30px;" scope="col">STT</th>
+                            <th style="min-width: 200px;" scope="col">Mã nhân viên</th>
+                            <th style="min-width: 200px;" scope="col">Email</th>
+                            <th style="min-width: 200px;" scope="col">Họ tên</th>
+                            <th style="min-width: 200px;" scope="col">Số điện thoại</th>
+                            <th style="min-width: 100px;" scope="col">CCCD/CMND</th>
+                            <th style="min-width: 100px;" scope="col">Địa chỉ</th>
+                            <th style="min-width: 200px;" scope="col">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,12 +45,12 @@
                                     <td>{{ $staff->phone ?? '' }}</td>
                                     <td>{{ $staff->cccd ?? '' }}</td>
                                     <td>{{ $staff->address ?? '' }}</td>
-                                    <td class="">
+                                    <td class="d-flex align-items-center">
                                         <a class="btn btn-danger btn-sm mr-3"
                                             href="{{ route('staff.delete', ['id' => $staff->id]) }}" title="Delete"
-                                            onclick="confirmation(event)"><i class="fa fa-trash"></i></a>
+                                            onclick="confirmation(event)"><i class="fa fa-trash"> Xóa</i></a>
                                         <a href="{{ route('staff.update', ['id' => $staff->id]) }}"
-                                            class="btn btn-primary btn-sm" title="Update"><i class="fa fa-pen"></i></a>
+                                            class="btn btn-primary btn-sm" title="Update"><i class="fa fa-pen"> Chỉnh Sửa</i></a>
                                     </td>
                                 </tr>
                             @endforeach

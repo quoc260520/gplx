@@ -30,9 +30,9 @@
                         <tr>
                             <th style="width:5%;" scope="col">STT</th>
                             <th style="width:25%;" scope="col">Khách hàng</th>
-                            <th style="width:25%" scope="col">Mã GPLX</th>
-                            <th style="width:25%" scope="col">Loại GPLX</th>
-                            <th style="width:20%" scope="col">Thao tác</th>
+                            <th style="width:20%" scope="col">Mã GPLX</th>
+                            <th style="width:10%" scope="col">Loại GPLX</th>
+                            <th style="width:30%" scope="col">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,13 +47,13 @@
                                         @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('staff'))
                                             <a class="btn btn-danger btn-sm mr-3"
                                                 href="{{ route('gplx.delete', ['id' => $gplx->id]) }}" title="Delete"
-                                                onclick="confirmation(event)"><i class="fa fa-trash"></i></a>
+                                                onclick="confirmation(event)"><i class="fa fa-trash"></i> Xóa</a>
                                             <a href="{{ route('gplx.update', ['id' => $gplx->id]) }}"
                                                 class="btn btn-primary btn-sm mr-3" title="Update"><i
-                                                    class="fa fa-pen"></i></a>
+                                                    class="fa fa-pen"></i> Chỉnh Sửa</a>
                                         @endif
                                         <button type="button" onclick="showModalGplx({{ $gplx->id }})"
-                                            class="btn btn-success btn-sm"><i class="fa fa-eye"></i></button>
+                                            class="btn btn-success btn-sm"><i class="fa fa-eye"></i> Xem</button>
                                     </td>
                                 </tr>
                             @endforeach
