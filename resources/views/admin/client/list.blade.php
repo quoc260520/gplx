@@ -12,8 +12,8 @@
                     placeholder="Email">
                 <input class="form-control me-2 mr-4" type="number" name="cccd" value="{{ $cccd ?? '' }}"
                     placeholder="CCCD/CMND">
-                <input class="form-control me-2 mr-4" type="number" name="driving_licenses_code" value="{{ $drivingLicensesCode ?? '' }}"
-                    placeholder="Số GPLX">
+                <input class="form-control me-2 mr-4" type="number" name="driving_licenses_code"
+                    value="{{ $drivingLicensesCode ?? '' }}" placeholder="Số GPLX">
                 <button class="btn btn-outline-success btn-sm" type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
@@ -31,8 +31,9 @@
                             <th style="min-width: 200px;" scope="col">Họ tên</th>
                             <th style="min-width: 200px;" scope="col">Số điện thoại</th>
                             <th style="min-width: 100px;" scope="col">CCCD/CMND</th>
+                            <th style="min-width: 200px;" scope="col">Số GPLX</th>
                             <th style="min-width: 100px;" scope="col">Địa chỉ</th>
-                            <th style="min-width: 200px;" scope="col">Thao tác</th>
+                            <th style="min-width: 100px;" scope="col">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,8 +45,17 @@
                                     <td>{{ $client->full_name ?? '' }}</td>
                                     <td>{{ $client->phone ?? '' }}</td>
                                     <td>{{ $client->cccd ?? '' }}</td>
+                                    <td>
+                                        @if (array_key_exists('driving_licenses', $client->toArray()))
+                                            @foreach ($client->drivingLicenses as $drivingLicense)
+                                                {{ $drivingLicense->driving_licenses_kind }}:
+                                                {{ $drivingLicense->driving_licenses_code }}
+                                                <br>
+                                            @endforeach
+                                        @endif
+                                    </td>
                                     <td>{{ $client->address ?? '' }}</td>
-                                    <td class="d-flex align-items-center">
+                                    <td class="">
                                         <a class="btn btn-danger btn-sm mr-3"
                                             href="{{ route('client.delete', ['id' => $client->id]) }}" title="Delete"
                                             onclick="confirmation(event)"><i class="fa fa-trash"></i> Xóa</a>

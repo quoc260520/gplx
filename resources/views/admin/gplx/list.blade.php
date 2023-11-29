@@ -80,6 +80,10 @@
                         <label for="recipient-name" class="col-form-label">Khách hàng</label>
                         <input type="text" class="form-control" id="fullname_modal" disabled>
                     </div>
+                     <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">CCCD</label>
+                        <input type="text" class="form-control" id="cccd_modal" disabled>
+                    </div>
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Số GPLX</label>
                         <input type="text" class="form-control" id="code_modal" disabled>
@@ -137,6 +141,7 @@
                 success: function(response) {
                     data = response.gplx;
                     $('#fullname_modal').val(data.user.full_name)
+                    $('#cccd_modal').val(data.user.cccd)
                     $('#code_modal').val(data.driving_licenses_code)
                     $('#kind_modal').val(data.driving_licenses_kind)
                     $('#supplier_modal').val(data.supplier.name)

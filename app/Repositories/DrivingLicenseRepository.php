@@ -163,4 +163,27 @@ class DrivingLicenseRepository
         $gplx = $this->getById($id);
         return $gplx->delete();
     }
+    public function getExtend($request) {
+        $cccd = $request->cccd;
+        $gplx = $this->model
+        ->where('status', DrivingLicense::STATUS_DEACTIVE)
+        ->orWhere('end_date','<', Carbon::now())
+        ->when($cccd, function ($query, $cccd) {
+            $query->whereHas('user', function (Builder $q) use ($cccd) {
+                $q->where('cccd', 'like', ["%$cccd%"]);
+            });
+        })
+        ->with('user')
+        ->orderByDesc('created_at')
+        ->paginate(20);
+        return [$cccd, $gplx];
+    }
+    public function postExtend($data, $id) {
+        $drivingLicense = $this->getById($id);
+        $gplx = $drivingLicense->update([
+            'end_date' => $data->end_date,
+            'status' => DrivingLicense::STATUS_ACTIVE,
+        ]);
+        return $gplx;
+    }
 }

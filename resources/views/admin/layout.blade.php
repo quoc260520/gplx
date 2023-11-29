@@ -157,7 +157,8 @@
                                 </ul>
                             </li>
 
-                            <li class="nav-item {{ Route::is('staff.*') ? 'menu-is-opening menu-open' : '' }} nav-item active">
+                            <li
+                                class="nav-item {{ Route::is('staff.*') ? 'menu-is-opening menu-open' : '' }} nav-item active">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-user"></i>
                                     <p>
@@ -199,15 +200,22 @@
                                         <p>Danh sách</p>
                                     </a>
                                 </li>
-@if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('staff'))
-                                <li class="nav-item">
-                                    <a href="{{ route('gplx.create') }}"
-                                        class="nav-link {{ Route::is('gplx.create') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm mới</p>
-                                    </a>
-                                </li>
-@endif
+                                @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('staff'))
+                                    <li class="nav-item">
+                                        <a href="{{ route('gplx.create') }}"
+                                            class="nav-link {{ Route::is('gplx.create') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Thêm mới</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('gplx.extend') }}"
+                                            class="nav-link {{ Route::is('gplx.extend') ? 'active' : '' }}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Gia hạn</p>
+                                        </a>
+                                    </li>
+                                @endif
                             </ul>
                         </li>
                         </li>
@@ -219,7 +227,8 @@
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper" style="background: linear-gradient(171deg, rgba(214,215,255,0.5802696078431373) 0%, rgba(224,227,237,1) 100%);">
+        <div class="content-wrapper"
+            style="background: linear-gradient(171deg, rgba(214,215,255,0.5802696078431373) 0%, rgba(224,227,237,1) 100%);">
             <!-- Content Header (Page header) -->
             @include('message')
             <!-- Main content -->

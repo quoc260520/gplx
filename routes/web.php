@@ -62,6 +62,8 @@ Route::group(['middleware' => ['checkLogin']], function () {
             Route::post('/create', [DrivingLicenseController::class, 'store'])->name('post.gplx.create');
             Route::get('/update/{id}', [DrivingLicenseController::class, 'show'])->name('gplx.update');
             Route::post('/update/{id}', [DrivingLicenseController::class, 'update'])->name('post.gplx.update');
+            Route::get('/extend', [DrivingLicenseController::class, 'extend'])->name('gplx.extend');
+            Route::post('/extend/{id}', [DrivingLicenseController::class, 'postExtend'])->name('post.gplx.extend');
             Route::delete('/delete/{id}', [DrivingLicenseController::class, 'destroy'])->name('gplx.delete');
         });
     Route::prefix('supplier')

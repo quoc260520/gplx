@@ -46,6 +46,7 @@ class UserRepository
                     $q->where('driving_licenses_code', 'like', ["%$driving_licenses_code%"]);
                 });
             })
+            ->with('drivingLicenses')
             ->orderByDesc('created_at')
             ->paginate(User::PAGINATE);
         return [$users, $email, $full_name, $phone, $cccd, $driving_licenses_code];

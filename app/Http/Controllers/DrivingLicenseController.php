@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Repositories\DrivingLicenseRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class DrivingLicenseController extends Controller
 {
@@ -134,6 +135,27 @@ class DrivingLicenseController extends Controller
         } catch (\Exception $e) {
             Log::channel('daily')->error($e->getMessage());
             return back()->withFlashDanger('Đã có lỗi xảy ra');
+        }
+    }
+    public function extend(Request $request)
+    {
+            [$cccd,$gplxs] = $this->drivingLicenseRepository->getExtend($request);
+            return view('admin.gplx.list_extend')->withGplxs($gplxs)->withCccd($cccd);
+    }
+    public function postExtend(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'end_date' => 'required|date|after:today'
+        ],[],['end_date' => 'ngày hết hạn']);
+        if ($validator->fails()) {
+            return redirect(route('gplx.extend'))->withFlashDanger($validator->errors()->first());
+         }
+        try {
+            $this->drivingLicenseRepository->postExtend($request, $id);
+            return redirect(route('gplx.extend'))->withFlashSuccess('Gia hạn thành công');
+        } catch (\Exception $e) {
+            Log::channel('daily')->error($e->getMessage());
+            return redirect(route('gplx.extend'))->withFlashDanger('Đã có lỗi xảy ra');
         }
     }
 }
